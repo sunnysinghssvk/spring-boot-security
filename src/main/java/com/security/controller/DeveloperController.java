@@ -17,38 +17,38 @@ public class DeveloperController {
     private final DeveloperService developerService;
 
     @PostMapping("/create")
-    public ResponseEntity<String> createNewDeveloper(@RequestBody Developer developer) {
+    public ResponseEntity<Object> createNewDeveloper(@RequestBody Developer developer) {
         boolean status = developerService.saveDeveloper(developer);
         if(status)
             return new ResponseEntity<>(SecurityConstants.SUCCESS, HttpStatus.OK);
         else
-            return new ResponseEntity<>(SecurityConstants.FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException(SecurityConstants.INTERNAL_SERVER_ERROR);
     }
 
     @PutMapping("/update")
-    public ResponseEntity<String> updateExistingDeveloper(@RequestBody Developer developer) {
+    public ResponseEntity<Object> updateExistingDeveloper(@RequestBody Developer developer) {
         boolean status = developerService.updateDeveloper(developer);
         if(status)
             return new ResponseEntity<>(SecurityConstants.SUCCESS, HttpStatus.OK);
         else
-            return new ResponseEntity<>(SecurityConstants.FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException(SecurityConstants.INTERNAL_SERVER_ERROR);
     }
 
     @GetMapping("/getAllDeveloper")
-    public ResponseEntity<List<Developer>> getAllDevelopers() {
+    public ResponseEntity<Object> getAllDevelopers() {
         List<Developer> developers = developerService.getAllDevelopers();
         if(developers != null)
             return new ResponseEntity<>(developers, HttpStatus.OK);
         else
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException(SecurityConstants.INTERNAL_SERVER_ERROR);
     }
 
     @DeleteMapping("/deleteById/{id}")
-    public ResponseEntity<String> deleteDeveloperById(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteDeveloperById(@PathVariable Long id) {
         boolean status = developerService.deleteDeveloperById(id);
         if(status)
             return new ResponseEntity<>(SecurityConstants.SUCCESS, HttpStatus.OK);
         else
-            return new ResponseEntity<>(SecurityConstants.FAILED, HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException(SecurityConstants.INTERNAL_SERVER_ERROR);
     }
 }
