@@ -1,6 +1,8 @@
+#Port Configuration
 server:
   port: 8080
 
+#DB Configuration
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -13,3 +15,16 @@ spring:
     show-sql: true
   application:
     name: spring-boot-security
+
+#Okta Configuration
+okta:
+  oauth2:
+    issuer: https://dev-41251411.okta.com/oauth2/default
+    audience: api://default
+    client-id: 0oafcp9ivxbb0l2Qu5d7
+    client-secret: -6oJnqaLaQNSYlMG6MEiCVdzKjfnrxkD0PMb1m25ndeqgrzvqpWWxvYNVJLeJIhW
+    scopes:
+      - openid
+      - profile
+      - email
+      - offline_access
