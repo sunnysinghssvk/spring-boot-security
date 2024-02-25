@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.security</groupId>
-	<artifactId>spring-boot-security</artifactId>
+	<artifactId>spring-boot-security-okta</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-boot-security</name>
+	<name>spring-boot-security-okta</name>
 	<description>Spring Security</description>
 	<properties>
 		<java.version>17</java.version>
