@@ -35,8 +35,11 @@ public class DeveloperController {
     }
 
     @GetMapping("/getAllDeveloper")
-    public ResponseEntity<Object> getAllDevelopers() {
-        List<Developer> developers = developerService.getAllDevelopers();
+    public ResponseEntity<Object> getAllDevelopers(
+            @RequestParam(value = "pageNumber", defaultValue = "1", required = false) Integer pageNumber,
+            @RequestParam(value = "pageSize", defaultValue = "2", required = false) Integer pageSize
+    ) {
+        List<Developer> developers = developerService.getAllDevelopers(pageNumber, pageSize);
         if(developers != null)
             return new ResponseEntity<>(developers, HttpStatus.OK);
         else

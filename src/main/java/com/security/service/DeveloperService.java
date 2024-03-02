@@ -4,6 +4,10 @@ import com.security.entity.Developer;
 import com.security.repository.DeveloperRepo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -58,9 +62,11 @@ public class DeveloperService {
      * READ operation for Developer
      * @return
      */
-    public List<Developer> getAllDevelopers() {
+    public List<Developer> getAllDevelopers(Integer pageNumber, Integer pageSize) {
         try {
-            List<Developer> developers = developerRepo.findAll();
+            Pageable pageable = PageRequest.of(pageNumber, pageSize, Sort.by("name").ascending());
+            Page<Developer> developersPage = developerRepo.findAll(pageable);
+            List<Developer> developers = developersPage.getContent();
             log.info("Developers List: {}", developers.toString());
             return developers;
         } catch (Exception e) {
